@@ -14,6 +14,9 @@ public class Gun : MonoBehaviour
 
     [SerializeField] ObjectPool bulletPool;
 
+    [SerializeField] GameObject gazeInteractor;
+    [SerializeField] GameObject gazeStabilized;
+
     private void OnEnable()
     {
         trigger.action.Enable();
@@ -31,6 +34,17 @@ public class Gun : MonoBehaviour
         {
             return;
         }
+
+        if (grip.action.WasPressedThisFrame())
+        {
+            ScanOn();
+            Debug.Log("스캔모드 On");
+        }
+        else if (grip.action.WasReleasedThisFrame())
+        {
+            ScanOff();
+            Debug.Log("스캔모드 Off");
+        }
     }
 
     private void OnDisable()
@@ -39,10 +53,16 @@ public class Gun : MonoBehaviour
         grip.action.Disable();
     }
 
+    #region 발사 관련
     public void Fire()
     {
-        //GameObject instance = Instantiate(bullet, muzzlePoint.position, muzzlePoint.rotation, null);
         PooledObject instance = bulletPool.GetPool(muzzlePoint.position, muzzlePoint.rotation);
+
+        if(instance == null )
+        {
+            Debug.Log("총알이 풀에서 다 나왔습니다");
+            return;
+        }
 
         if (instance.TryGetComponent(out Rigidbody rb))
         {
@@ -54,4 +74,19 @@ public class Gun : MonoBehaviour
     {
         rb.velocity = muzzlePoint.forward * bulletSpeed;
     }
+    #endregion
+
+    #region 스캔 관련
+    public void ScanOn()
+    {
+        gazeInteractor.SetActive(true);
+        gazeStabilized.SetActive(true);
+    }
+
+    public void ScanOff()
+    {
+        gazeInteractor.SetActive(false);
+        gazeStabilized.SetActive(false);
+    }
+    #endregion
 }
