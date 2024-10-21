@@ -26,5 +26,12 @@ public class PooledObject : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         returnPool.ReturnPool(this);
+
+        if(collision.collider.CompareTag("Robot"))
+        {
+            RobotMonster instance = collision.gameObject.GetComponent<RobotMonster>();
+            instance.hp--;
+            returnPool.ReturnPool(this);
+        }
     }
 }

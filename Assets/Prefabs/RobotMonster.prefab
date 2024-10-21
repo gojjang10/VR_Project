@@ -2523,9 +2523,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7818138371334294328}
   - component: {fileID: 7864518564506610030}
+  - component: {fileID: 95884865065446399}
+  - component: {fileID: 95884865065446400}
+  - component: {fileID: 95884865065446398}
   m_Layer: 0
   m_Name: RobotMonster
-  m_TagString: Untagged
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2537,16 +2540,17 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7815650322181574058}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
+  m_LocalRotation: {x: -0, y: 0.0000029504295, z: -0, w: 1}
   m_LocalPosition: {x: -2.9794054, y: 0.00000011920929, z: 15.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7817833638156334900}
   - {fileID: 7809257736256734288}
+  - {fileID: 6054201481295850491}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &7864518564506610030
 Animator:
   serializedVersion: 5
@@ -2568,6 +2572,70 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &95884865065446399
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815650322181574058}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!136 &95884865065446400
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815650322181574058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.9290746
+  m_Direction: 1
+  m_Center: {x: -0, y: 0.8858667, z: 0}
+--- !u!114 &95884865065446398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7815650322181574058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f599d07953924f042b6b6ee600ccce18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curState: 0
+  states: []
+  idleState:
+    monster: {fileID: 95884865065446398}
+  walkState:
+    monster: {fileID: 95884865065446398}
+  attackState:
+    monster: {fileID: 95884865065446398}
+  deadState:
+    monster: {fileID: 95884865065446398}
+  player: {fileID: 0}
+  detectionRange: 10
+  walkSpeed: 3
+  rb: {fileID: 95884865065446399}
+  animator: {fileID: 7864518564506610030}
+  idleTimer: 3
+  secondLevelClear:
+    m_PersistentCalls:
+      m_Calls: []
+  bulletPool: {fileID: 0}
+  muzzlePoint: {fileID: 0}
+  hp: 5
 --- !u!1 &7815668856658956756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2860,4 +2928,35 @@ Transform:
   - {fileID: 7817724645946074714}
   m_Father: {fileID: 7809390493768196900}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8923292440936191393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6054201481295850491}
+  m_Layer: 0
+  m_Name: MuzzlePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6054201481295850491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923292440936191393}
+  m_LocalRotation: {x: -0, y: -0.0000029504295, z: 0, w: 1}
+  m_LocalPosition: {x: 0.188, y: 1.139, z: 0.761}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7818138371334294328}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
